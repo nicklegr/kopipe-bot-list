@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Account:
+  = @bot.account
+%p
+  %b User:
+  = @bot.user_id
+%p
+  %b Name:
+  = @bot.name
+%p
+  %b Followers:
+  = @bot.followers
+%p
+  %b Comment:
+  = @bot.comment
+
+= link_to 'Edit', edit_bot_path(@bot)
+\|
+= link_to 'Back', bots_path
