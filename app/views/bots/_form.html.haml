@@ -1,25 +1,24 @@
-= form_for @bot do |f|
-  -if @bot.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@bot.errors.count, "error")} prohibited this bot from being saved:"
-      %ul
-        - @bot.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :account
-    = f.text_field :account
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :followers
-    = f.number_field :followers
-  .field
-    = f.label :comment
-    = f.text_area :comment
-  .actions
-    = f.submit 'Save'
+= form_for @bot, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :account, :class => 'control-label'
+    .controls
+      = f.text_field :account, :class => 'text_field'
+  .control-group
+    = f.label :user_id, :class => 'control-label'
+    .controls
+      = f.number_field :user_id, :class => 'number_field'
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'text_field'
+  .control-group
+    = f.label :followers, :class => 'control-label'
+    .controls
+      = f.number_field :followers, :class => 'number_field'
+  .control-group
+    = f.label :comment, :class => 'control-label'
+    .controls
+      = f.text_area :comment, :class => 'text_area'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), bots_path, :class => 'btn'
