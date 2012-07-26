@@ -24,6 +24,9 @@ gem 'jquery-rails'
 
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
+gem 'active_form', :git => "git://github.com/cs/active_form.git"
+
+gem 'twitter'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

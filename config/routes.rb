@@ -1,5 +1,10 @@
 KopipeBotList::Application.routes.draw do
-  resources :bots
+  resources :bots do
+    collection do
+      get 'bulk_new'
+      post 'bulk_create'
+    end    
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

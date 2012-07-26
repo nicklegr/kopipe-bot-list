@@ -1,3 +1,7 @@
+class BulkNew < ActiveForm
+  attr_accessor :bots
+end
+
 class BotsController < ApplicationController
   # GET /bots
   # GET /bots.json
@@ -32,6 +36,17 @@ class BotsController < ApplicationController
     end
   end
 
+  # GET /bots/bulk_new
+  # GET /bots/bulk_new.json
+  def bulk_new
+    @bulk_new = BulkNew.new
+
+    respond_to do |format|
+      format.html # bulk_new.html.erb
+      format.json { render json: @bulk_new }
+    end
+  end
+  
   # GET /bots/1/edit
   def edit
     @bot = Bot.find(params[:id])
@@ -49,6 +64,33 @@ class BotsController < ApplicationController
       else
         format.html { render action: "new" }
         format.json { render json: @bot.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /bots/bulk_create
+  # POST /bots/bulk_create.json
+  def bulk_create
+    @bulk_new = BulkNew.new(params[:bulk_new])
+
+    respond_to do |format|
+      if @bulk_new.valid?
+        @bulk_new.bots.split.each do |e|
+          bot = Bot.by_account(e)
+          if bot.errors.empty?
+            bot.save!
+          else
+            @bulk_new.errors.add(:bots, "invalid account #{e}")
+          end
+        end
+
+        if @bulk_new.errors.empty?
+          format.html { redirect_to bots_url }
+          format.json { rhead :no_content }
+        else
+          format.html { render action: "bulk_new" }
+          format.json { render json: @bulk_new.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

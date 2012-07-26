@@ -1,0 +1,10 @@
+-# @todo errors
+
+= form_for @bulk_new, { :url => 'bulk_create', :html => { :class => 'form-horizontal' } } do |f|
+  .control-group
+    = f.label :bots, 'アカウント名', :class => 'control-label'
+    .controls
+      = f.text_area :bots, :class => 'text_area'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), bots_path, :class => 'btn'
