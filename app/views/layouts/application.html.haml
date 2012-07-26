@@ -28,9 +28,8 @@
           %a.brand(href="#") KopipeBotList
           .container.nav-collapse
             %ul.nav
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
+              %li= link_to "一覧", bots_url
+              %li= link_to "追加", url_for(controller: :bots, action: :bulk_new)
 
     .container
       .content
