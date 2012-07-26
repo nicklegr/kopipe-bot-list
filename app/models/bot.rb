@@ -11,7 +11,7 @@ class Bot < ActiveRecord::Base
       bot.name = user.name
       bot.user_id = user.id
     rescue
-      bot.errors.add(:account, "Invalid user #{account}")
+      bot.errors.add(:account, "Invalid account '#{account}'")
     end
 
     bot

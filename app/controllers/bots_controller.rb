@@ -80,7 +80,9 @@ class BotsController < ApplicationController
           if bot.errors.empty?
             bot.save!
           else
-            @bulk_new.errors.add(:bots, "invalid account #{e}")
+            bot.errors.each do |attribute, error|
+              @bulk_new.errors.add(attribute, error)
+            end
           end
         end
 
@@ -88,6 +90,7 @@ class BotsController < ApplicationController
           format.html { redirect_to bots_url }
           format.json { rhead :no_content }
         else
+          flash[:alert] = @bulk_new.errors.map{|attribute, error| error }.join("<br/>")
           format.html { render action: "bulk_new" }
           format.json { render json: @bulk_new.errors, status: :unprocessable_entity }
         end
