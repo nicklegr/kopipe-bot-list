@@ -75,6 +75,7 @@ class BotsController < ApplicationController
 
     respond_to do |format|
       if @bulk_new.valid?
+        # @todo エラー時にOKのものも保存されてしまってる
         @bulk_new.bots.split.each do |e|
           bot = Bot.by_account(e)
           if bot.errors.empty?

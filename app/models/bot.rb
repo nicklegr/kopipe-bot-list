@@ -5,7 +5,9 @@ class Bot < ActiveRecord::Base
     bot = new()
 
   	begin
+      account.gsub!(/^@/, '')
       user = Twitter.user(account)
+
       bot.account = account
       bot.followers = user.followers_count
       bot.name = user.name
