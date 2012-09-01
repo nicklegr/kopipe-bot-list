@@ -133,6 +133,8 @@ class BotsController < ApplicationController
   def update_by_api
     user_ids = Bot.all.map{|e| e.user_id }
 
+    # @todo 一度に100人までだったかも
+    # @todo アカウント名が変更されたらログを残す
     auth_twitter()
     Twitter.users(user_ids).each do |user|
       bot = Bot.where(user_id: user.id).first
