@@ -79,11 +79,11 @@ class BotsController < ApplicationController
         @bulk_new.bots.split.each do |e|
           bot = Bot.by_account(e)
           if bot.errors.empty?
-            bot.save!
-          else
-            bot.errors.each do |attribute, error|
-              @bulk_new.errors.add(attribute, error)
-            end
+            bot.save
+          end
+
+          bot.errors.each do |attribute, error|
+            @bulk_new.errors.add(attribute, error)
           end
         end
 

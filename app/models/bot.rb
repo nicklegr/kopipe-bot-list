@@ -18,4 +18,6 @@ class Bot < ActiveRecord::Base
 
     bot
   end
+
+  validates_uniqueness_of :user_id, :message => "account already registered"
 end
