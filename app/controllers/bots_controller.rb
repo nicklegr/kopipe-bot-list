@@ -129,4 +129,17 @@ class BotsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def update_by_api
+    user_ids = Bot.all.map{|e| e.user_id }
+
+    auth_twitter()
+    Twitter.users(user_ids).each do |user|
+      bot = Bot.where(user_id: user.id).first
+      bot.account = user.screen_name
+      bot.followers = user.followers_count
+      bot.name = user.name
+      bot.save!
+    end
+  end
 end

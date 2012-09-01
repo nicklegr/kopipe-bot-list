@@ -1,7 +1,7 @@
 KopipeBotList::Application.routes.draw do
   resources :bots do
     collection do
-      get 'bulk_new'
+      get 'bulk_new', 'update_by_api'
       post 'bulk_create'
     end    
   end
