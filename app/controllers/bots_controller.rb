@@ -75,16 +75,19 @@ class BotsController < ApplicationController
 
     respond_to do |format|
       if @bulk_new.valid?
-        # @todo エラー時にOKのものも保存されてしまってる
-        @bulk_new.bots.split.each do |e|
-          bot = Bot.by_account(e)
-          if bot.errors.empty?
-            bot.save
+        Bot.transaction do
+          @bulk_new.bots.split.each do |e|
+            bot = Bot.by_account(e)
+            if bot.errors.empty?
+              bot.save
+            end
+
+            bot.errors.each do |attribute, error|
+              @bulk_new.errors.add(attribute, error)
+            end
           end
 
-          bot.errors.each do |attribute, error|
-            @bulk_new.errors.add(attribute, error)
-          end
+          raise ActiveRecord::Rollback unless @bulk_new.errors.empty?
         end
 
         if @bulk_new.errors.empty?
