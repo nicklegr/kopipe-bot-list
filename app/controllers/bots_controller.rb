@@ -6,7 +6,7 @@ class BotsController < ApplicationController
   # GET /bots
   # GET /bots.json
   def index
-    @bots = Bot.all
+    @bots = Bot.order('followers desc')
 
     respond_to do |format|
       format.html # index.html.erb
