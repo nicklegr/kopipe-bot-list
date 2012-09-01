@@ -1,3 +1,5 @@
+include ApplicationHelper
+
 class Bot < ActiveRecord::Base
   attr_accessible :account, :comment, :followers, :name, :user_id
 
@@ -6,6 +8,8 @@ class Bot < ActiveRecord::Base
 
   	begin
       account.gsub!(/^@/, '')
+
+      auth_twitter()
       user = Twitter.user(account)
 
       bot.account = account
