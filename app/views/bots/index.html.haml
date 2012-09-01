@@ -15,7 +15,10 @@
     - @bots.each do |bot|
       %tr
         %td= link_to bot.id, bot_path(bot)
-        %td= link_to bot.account, "https://twitter.com/#{bot.account}"
+        %td
+          %a{ href: "https://twitter.com/#{bot.account}" }
+            = image_tag "http://api.dan.co.jp/twicon/#{bot.account}/normal"
+            = bot.account
         %td= bot.user_id
         %td= bot.name
         %td= bot.followers
