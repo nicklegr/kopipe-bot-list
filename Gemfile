@@ -26,6 +26,7 @@ gem 'jquery-rails'
 
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
+gem 'therubyracer'
 gem 'active_form', :git => "git://github.com/cs/active_form.git"
 
 gem 'twitter'
