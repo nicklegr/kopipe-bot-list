@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120721120107) do
+ActiveRecord::Schema.define(:version => 20140906083353) do
 
   create_table "bots", :force => true do |t|
     t.string   "account"
-    t.integer  "user_id"
+    t.integer  "user_id",    :limit => 8
     t.string   "name"
     t.integer  "followers"
     t.text     "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
 end
